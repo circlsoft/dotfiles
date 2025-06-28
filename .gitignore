@@ -1,0 +1,26 @@
+# Ignore sensitive files
+ssh/id_*
+ssh/*.pem
+ssh/*.key
+
+# Ignore OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Ignore temporary files
+*.tmp
+*.temp
+*.log
+*.swp
+*.swo
+*~
+
+# Ignore personal/local configurations
+local/
+private/
+*.local
