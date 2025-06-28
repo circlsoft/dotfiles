@@ -60,6 +60,35 @@ if [ -d "$DOTFILES_DIR/config" ]; then
     done
 fi
 
+# Oh-my-zsh custom configurations
+echo "Setting up oh-my-zsh custom configurations..."
+if [ -d "$DOTFILES_DIR/oh-my-zsh/custom" ]; then
+    create_symlink "$DOTFILES_DIR/oh-my-zsh/custom" "$HOME/.oh-my-zsh/custom"
+fi
+
+# NPM configuration
+echo "Setting up NPM configuration..."
+if [ -f "$DOTFILES_DIR/npm/.npmrc" ]; then
+    create_symlink "$DOTFILES_DIR/npm/.npmrc" "$HOME/.npmrc"
+fi
+
+# NVM configuration
+echo "Setting up NVM configuration..."
+if [ -f "$DOTFILES_DIR/nvm/.nvmrc" ]; then
+    create_symlink "$DOTFILES_DIR/nvm/.nvmrc" "$HOME/.nvmrc"
+fi
+
+# Local environment configurations
+echo "Setting up local environment configurations..."
+if [ -d "$DOTFILES_DIR/local" ]; then
+    for local_item in "$DOTFILES_DIR/local"/*; do
+        if [ -e "$local_item" ]; then
+            local_name=$(basename "$local_item")
+            create_symlink "$local_item" "$HOME/.local/bin/$local_name"
+        fi
+    done
+fi
+
 echo ""
 echo "✅ Dotfiles installation complete!"
 echo "📁 Backup directory: $BACKUP_DIR"
@@ -67,4 +96,6 @@ echo ""
 echo "You may need to:"
 echo "  - Restart your terminal for shell changes to take effect"
 echo "  - Configure SSH keys manually"
+echo "  - Install oh-my-zsh if not already installed"
 echo "  - Install required applications mentioned in the configs"
+echo "  - Run 'source ~/.zshrc' to reload oh-my-zsh with custom plugins"
